@@ -10,16 +10,15 @@ public class Delivery : MonoBehaviour
         {
             Debug.Log("Package picked up!");
             hasPackage = true;
+            GetComponent<ParticleSystem>().Play();
             Destroy(other.gameObject);
         }
 
-        if(other.CompareTag("Customer"))
+        if(other.CompareTag("Customer") && hasPackage)
         {
-            if(hasPackage)
-            {
-                Debug.Log("I delivered the package!");
-                hasPackage = false;
-            }
+            Debug.Log("I delivered the package!");
+            hasPackage = false;
+            GetComponent<ParticleSystem>().Stop();
         }
     }
 }
